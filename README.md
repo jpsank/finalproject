@@ -25,15 +25,15 @@ Some guidelines and tips:
 
 OK, here we go.
 
-# Title of my project
+# Genetic Algorithms for Phylogenetic Inference (GAPI)
 
 ## Introduction and Goals
 
-The goal of my project is to answer the question, What is...?
+The goal of my project is to answer the question, How can genetic algorithms, inspired by the Neuroevolution of Augmenting Topologies algorithm, be developed to enhance the efficiency or effectiveness of phylogenetic tree search?
 
-The methods I will use to do this are...
+The methods I will use to do this are: Python or C code to write the genetic algorithm, plus standard phylogenetic inference tools like IQ-TREE for comparison.
 
-The data I will use are (my own data/ data publicly available at YYY/ simulations)
+The data I will use are: Data will be taken from public datasets like the algae protein-coding genes from the Harnessing Machine Learning paper.
 
 ## Methods
 
