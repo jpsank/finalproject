@@ -2,11 +2,6 @@
 
 # NEAT-based Phylogenetic Inference
 
-## Lit Review
-
-Gaphyl, GARLI (Genetic Algorithm for Rapid Likelihood Inference) and GARLI 2.0, Recursive-Iterative-DCM3, and GAML (genetic algorithm for maximum likelihood).
-“Harnessing machine learning to guide phylogenetic-tree search algorithms”, multi-objective optimization + evolutionary algorithms (MOEA), paper describing a "new phylogenetic protocol."
-
 ## Introduction and Goals
 
 Research Question: To what extent are genetic algorithms useful and effective for phylogenetic tree search, and how do they compare to standard inference methods?
@@ -15,6 +10,11 @@ Methods: Python using `biopython` library and/or `phylotreelib` to process trees
 Standard phylogenetic inference methods will be tested using the `biopython` library and/or IQ-TREE command line tool. The results will be compared by running likelihood evaluations on the final trees generated.
 
 Data will consist of aligned sequences; the Harnessing Machine Learning paper includes a few good datasets for testing phylogenetic inference methods, so those, including the algae protein-coding genes dataset, will be used here. No specific dataset is necessary for testing the new method; instead, several representational datasets like the protein-coding dataset, will be employed to evaluate different phylogenetic inference methods.
+
+## Lit Review
+
+Gaphyl, GARLI (Genetic Algorithm for Rapid Likelihood Inference) and GARLI 2.0, Recursive-Iterative-DCM3, and GAML (genetic algorithm for maximum likelihood).
+“Harnessing machine learning to guide phylogenetic-tree search algorithms”, multi-objective optimization + evolutionary algorithms (MOEA), paper describing a "new phylogenetic protocol."
 
 ## Methods
 
