@@ -1,39 +1,20 @@
 # Phylogenetic Biology - Final Project
 
-## Guidelines - you can delete this section before submission
+# NEAT-based Phylogenetic Inference
 
-This is a stub for your final project. Edit/ delete the text in this readme as needed.
+## Lit Review
 
-There are two ways you can use this document:  
-- You can download this file to a folder on your computer, edit this document and add other files (data, code, etc), and then zip up and submit the folder on canvas.
-- You can for the [repository](finalproject) containing this document on gitub. Then commit and push your canges to the repository, and submit a link to the repository on canvas.
-
-Github is a great way to work on projects, but also has a steep initial learning curve.
-
-
-Some guidelines and tips:
-
-- Use the stubs below to write up your final project. Alternatively, if you would like the writeup to be an executable document (with [knitr](http://yihui.name/knitr/), [jupytr](http://jupyter.org/), or other tools), you can create it as a separate file and put a link to it here in the readme.
-
-- For information on formatting text files with markdown, see https://guides.github.com/features/mastering-markdown/ . You can use markdown to include images in this document by linking to files in the repository, eg `![GitHub Logo](/images/logo.png)`.
-
-- The project must be entirely reproducible. In addition to the results, the repository must include all the data (or links to data) and code needed to reproduce the results.
-
-- If you are working with unpublished data that you would prefer not to publicly share at this time, please contact me to discuss options. In most cases, the data can be anonymized in a way that putting them in a public repo does not compromise your other goals.
-
-- Paste references (including urls) into the reference section, and cite them with the general format (Smith at al. 2003).
-
-OK, here we go.
-
-# Genetic Algorithms for Phylogenetic Inference (GAPI)
+Gaphyl, GARLI (Genetic Algorithm for Rapid Likelihood Inference) and GARLI 2.0, Recursive-Iterative-DCM3, and GAML (genetic algorithm for maximum likelihood).
+“Harnessing machine learning to guide phylogenetic-tree search algorithms”, multi-objective optimization + evolutionary algorithms (MOEA), paper describing a "new phylogenetic protocol."
 
 ## Introduction and Goals
 
-The goal of my project is to answer the question, How can genetic algorithms, inspired by the Neuroevolution of Augmenting Topologies algorithm, be developed to enhance the efficiency or effectiveness of phylogenetic tree search?
+Research Question: To what extent are genetic algorithms useful and effective for phylogenetic tree search, and how do they compare to standard inference methods?
 
-The methods I will use to do this are: Python or C code to write the genetic algorithm, plus standard phylogenetic inference tools like IQ-TREE for comparison.
+Methods: Python using `biopython` library and/or `phylotreelib` to process trees and perform subtree pruning and regrafting operations. Expecting to use SPR moves as mutations in the final genetic algorithm, although other methods such as swapping two nodes/clades may also be implemented as the project evolves. Rather than completely excluded, likelihood maximization could be incorporated into the genetic algorithm, i.e. as a way to bias mutations towards beneficial topological changes (e.g. by swapping branches with lowest bootstrap scores). The genetic algorithm will be written in Python as well, using Newick format as genomes and implementing strategies from the field of evolutionary computation to solve common pitfalls of genetic algorithms (e.g. premature feature loss resolved by elitism, local optima overcome by dividing population into species). Specifically, some elements of the NEAT algorithm (Neuroevolution of Augmenting Topologies), such as the method for keeping track of specific branch nodes' origins as a proxy for homology when performing genetic crossover.
+Standard phylogenetic inference methods will be tested using the `biopython` library and/or IQ-TREE command line tool. The results will be compared by running likelihood evaluations on the final trees generated.
 
-The data I will use are: Data will be taken from public datasets like the algae protein-coding genes from the Harnessing Machine Learning paper.
+Data will consist of aligned sequences; the Harnessing Machine Learning paper includes a few good datasets for testing phylogenetic inference methods, so those, including the algae protein-coding genes dataset, will be used here. No specific dataset is necessary for testing the new method; instead, several representational datasets like the protein-coding dataset, will be employed to evaluate different phylogenetic inference methods.
 
 ## Methods
 
