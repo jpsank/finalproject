@@ -1,0 +1,252 @@
+---
+title: "Exercise 07"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, echo = FALSE, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(ape)
+
+# Load data import, wrangling, and plotting tools from the Tidyverse. 
+# See https://r4ds.had.co.nz/ for more
+library(tidyverse)
+
+library(magrittr)
+
+```
+
+
+## Introduction
+
+
+The goals of this exercise are to:
+- Introduce you to bayesian analysis using revbayes
+
+This file will not knit until all the results from RevBayes are in a folder with it. You can click Run > Run All to run the code up to what you have completed as you step through the exercise.
+
+
+[RevBayes](https://revbayes.github.io) is a very flexible tool for phylogenetic analyses. You have extensive control over which features of your model are constant, deterministic, or stochastic. This allows RevBayes to do a standard Bayesian phylogenetic inference, but it can also do much more including time calibration, ancestral character state reconstruction, and phylogenetic comparative analyses. 
+
+This flexibility comes with greater complexity than many other tools. For example, the models are explicitly specified rather than just called by name (eg GTR). The configurations are placed in RevBayes script files that typically end with the file extension `.Rev`. These files contain a series of commands written in RevBayes' own language, which has a  [syntax](https://revbayes.github.io/tutorials/intro/rev.html) similar to R. For an introduction to how to specify models and implement analyses see the documentation on  [Getting Started with RevBayes tutorial](https://revbayes.github.io/tutorials/intro/getting_started.html). For an overview of all the commands see the [documentation](https://revbayes.github.io/documentation/).
+
+
+A typical RevBayes script has commands that load the data, set up the model, define the analysis, run the analysis, and control what is in the output and where it goes. For routine analyses you can modify the basics of existing files, changing the input and output files for example. For more more specialized analyses you can extensively revise and expand these files, or write them from scrap.
+
+There is a series of detailed [tutorials](https://revbayes.github.io/tutorials/) that serve as a great starting point for using RevBayes. This exercise is based off of the [Nucleotide substitution models](https://revbayes.github.io/tutorials/ctmc/) tutorial.
+
+
+## Software
+
+[RevBayes](https://revbayes.github.io/) can be difficult to install because it requires an external library, boost. I suggest using it on a remote cluster.
+
+We will also use two desktop tools to view the results. Both require [java](https://www.oracle.com/java/technologies/javase-jre8-downloads.html), which you will need to install if you don't have it already.
+
+Install these desktop tools on your computer:
+
+- [FigTree](https://github.com/rambaut/figtree/releases), a phylogeny viewer.
+- [Tracer](http://beast.community/tracer), a trace viewer.
+
+
+## Exercise files
+
+This exercise folder contains:
+
+- A `data` directory with the multiple sequence alignment we will consider, in nexus format.
+- A series of `.Rev` revbayes scripts. Each contains all the RevBays commands for one analysis.
+- Example job scripts. These are used to launch the RevBayes analyses, including point the RevBays program, called `rb`, to the `.Rev` script that contains the commands for your analysis.
+
+
+## Following the tutorial
+
+This exercise is a bit different than the others in that you are fallowing another existing tutorial -- [Nucleotide substitution models](https://revbayes.github.io/tutorials/ctmc/). The problems listed here related to that tutorial and the steps you take there. 
+
+That tutorial is written as if you are running the commands on your own computer. We will run it on the cluster. This requires some deviations from the instructions in the tutorial. Rather than launch the scripts by opening RevBayes and running a `source()` command, you will use the `job*.sh` slurm scripts to launch revbayes and run the `.Rev` scripts. To run the JC analysis, for example, lanunch the job on the cluster with:
+
+    sbatch job_jc.sh
+
+In the interest of time, we will skip the HKY model. Feel free to go through it if you like.
+
+
+## Summarizing MCMC Samples
+
+To understand the MCMC sampling, plot some key variables recorded in the log file through generations. Download the output file from the cluster and place it on your computer in the same folder as this file.
+
+You can view the log files with [Tracer](http://beast.community/tracer), or with the code below.
+
+We will plot the summary MCMC stats right here in R. Each replicate is shown as a different color.
+
+```{r}
+
+trace_jc = read_tsv("revbayes_output/output_jc/primates_cytb_JC.log")
+
+trace_jc %<>%                           # Read the data
+  mutate(Replicate_ID = as.factor(Replicate_ID))                       # Convert the replicate id to a factor
+  trace_jc %<>% mutate(Iteration = Iteration %/% length(levels(trace_jc$Replicate_ID)))  # The iterations are sequenctial across all replicates. Rescale them so that they are in number of generations per replicate, rather than total number of samples
+
+```
+Now let's plot Tree length, TL, as in the tutorial:
+
+```{r}
+trace_jc %>%
+  ggplot(aes(x=Iteration, y=TL, col=Replicate_ID), alpha=0.2) + geom_line()
+```
+
+```{r}
+trace_jc %>%
+  ggplot(aes(x=Iteration, y=Likelihood, col=Replicate_ID), alpha=0.2) + geom_line()
+```
+
+These plots show all iteration, ie generations. These include the first MCMC iterations before the run has burned in. By default, the [`readTreeTrace`](https://revbayes.github.io/documentation/readTreeTrace.html) that is used in our scripts to import trees to summarize them discards the phylogenies from the first 25% of iterations as a burn in. Here we will do the same, and replot:
+
+
+```{r}
+trace_jc %>%
+  filter( Iteration > 2500 ) %>%
+  ggplot(aes(x=Iteration, y=TL, col=Replicate_ID), alpha=0.2) + geom_line()
+```
+
+
+```{r}
+trace_jc %>%
+  filter( Iteration > 2500 ) %>%
+  ggplot(aes(x=Iteration, y=Likelihood, col=Replicate_ID), alpha=0.2) + geom_line()
+```
+
+
+Now we will also look at the post-burning distribution of TL and Likelihood
+
+```{r}
+trace_jc %>%
+  filter( Iteration > 2500 ) %>%
+  ggplot(aes(TL, fill = Replicate_ID, colour = Replicate_ID)) +
+    geom_density(alpha = 0.1)
+```
+
+```{r}
+trace_jc %>%
+  filter( Iteration > 2500 ) %>%
+  ggplot(aes(Likelihood, fill = Replicate_ID, colour = Replicate_ID)) +
+    geom_density(alpha = 0.1)
+```
+
+> **_Problem 1:_** (2 points) Answer the following questions about the MCMC summaries for the JC model above.
+
+- Was the burnin sufficient?
+ANSWER: Yes, the burnin was sufficient. After burnin, the likelihood and tree length distributions each center around a single peak. After the initial burnin, the likelihood and tree length distributions are stable and do not change much- excluding what seems to be random noise- over the remaining iterations.
+- Does mixing look good?
+ANSWER: Yes, the mixing looks good. After burnin, the plots appear to be random noise and there are no obvious patterns.
+- When considering the whole run, why do you think tree length (TL) starts high and then gets lower, while Likelihood starts low and gets higher?
+ANSWER: In Maximum Parsimony, tree length is minimized to find the most parsimonious tree. In Maximum Likelihood, likelihood is maximized to find the most likely tree. Therefore, it makes sense that the tree length would go down and the likelihood would go up as the MCMC searches for the tree that best fits the data. In the RevBayes code, the model of tree length is exponential, so we'd expect it to start high then decay exponentially as the branch lengths get shorter. 
+- Did the replicates converge on similar parameter distributions?
+ANSWER: Yes, the distributions are very similar. The tree length and likelihood plots for the replicates overlap and their distributions have the same shape.
+
+Open the tree `output_jc/primates_cytb_JC_MAP.tree` on your local computer with FigTree to inspect the topology, edge length, and posterior probabilities. You will need to check the `Node Labels` box and then in `Display:` select `posterior`.
+
+> **_Problem 2:_** (1.5 points) Answer the following questions for the GTR analyses. Copy and paste the codeblocks from above and modify them to import these results and plot them, or use Tracer to view the results. Pick at least one other model paraemter to examine in addition to TL and Likelihood. Note that this analysis has just a single replicate. 
+
+```{r}
+
+trace_gtr = read_tsv("revbayes_output/output_gtr/primates_cytb_GTR.log")
+
+trace_gtr %>%
+  ggplot(aes(x=Iteration, y=TL), alpha=0.2) + geom_line()
+
+trace_gtr %>%
+  ggplot(aes(x=Iteration, y=Likelihood), alpha=0.2) + geom_line()
+
+trace_gtr %>%
+  ggplot(aes(x=Iteration, y=Prior), alpha=0.2) + geom_line()
+
+trace_gtr %>%
+  filter( Iteration > 2500 ) %>%
+  ggplot(aes(x=Iteration, y=TL), alpha=0.2) + geom_line()
+
+trace_gtr %>%
+  filter( Iteration > 2500 ) %>%
+  ggplot(aes(x=Iteration, y=Likelihood), alpha=0.2) + geom_line()
+
+trace_gtr %>%
+  filter( Iteration > 2500 ) %>%
+  ggplot(aes(x=Iteration, y=Prior), alpha=0.2) + geom_line()
+
+trace_gtr %>%
+  filter( Iteration > 2500 ) %>%
+  ggplot(aes(TL)) +
+    geom_density(alpha = 0.1)
+
+trace_gtr %>%
+  filter( Iteration > 2500 ) %>%
+  ggplot(aes(Likelihood)) +
+    geom_density(alpha = 0.1)
+
+trace_gtr %>%
+  filter( Iteration > 2500 ) %>%
+  ggplot(aes(Prior)) +
+    geom_density(alpha = 0.1)
+```
+
+- Was the burnin sufficient?
+ANSWER: Yes, the burnin was sufficient. After burnin, the likelihood, tree length, and prior distributions each center around a single peak. Their plots all appear to be random noise and there are no obvious patterns.
+- Does mixing look good?
+ANSWER: Yes, the mixing looks good. Like the white noise graph we saw in class, the after-burnin plots appear to be random noise and there are no obvious patterns.
+- Did the replicates converge on similar parameter distributions?
+ANSWER: There is only one replicate, so this question does not apply.
+
+> **_Problem 3:_** (1.5 points) Answer the following questions for the GTR+IG analyses. Copy and paste the codeblocks from above and modify them to import these results and plot them, or use Tracer to view the results. Examine alpha in addition to TL and likelihood. Note that this analysis has just a single replicate. 
+
+
+```{r}
+
+trace_gtrig = read_tsv("revbayes_output/output_gtrig/primates_cytb_GTRGI.log")
+
+trace_gtrig %>%
+  ggplot(aes(x=Iteration, y=TL), alpha=0.2) + geom_line()
+
+trace_gtrig %>%
+  ggplot(aes(x=Iteration, y=Likelihood), alpha=0.2) + geom_line()
+
+trace_gtrig %>%
+  ggplot(aes(x=Iteration, y=alpha), alpha=0.2) + geom_line()
+
+trace_gtrig %>%
+  filter( Iteration > 2500 ) %>%
+  ggplot(aes(x=Iteration, y=TL), alpha=0.2) + geom_line()
+
+trace_gtrig %>%
+  filter( Iteration > 2500 ) %>%
+  ggplot(aes(x=Iteration, y=Likelihood), alpha=0.2) + geom_line()
+
+trace_gtrig %>%
+  filter( Iteration > 2500 ) %>%
+  ggplot(aes(x=Iteration, y=alpha), alpha=0.2) + geom_line()
+
+trace_gtrig %>%
+  filter( Iteration > 2500 ) %>%
+  ggplot(aes(TL)) +
+    geom_density(alpha = 0.1)
+
+trace_gtrig %>%
+  filter( Iteration > 2500 ) %>%
+  ggplot(aes(Likelihood)) +
+    geom_density(alpha = 0.1)
+
+trace_gtrig %>%
+  filter( Iteration > 2500 ) %>%
+  ggplot(aes(alpha)) +
+    geom_density(alpha = 0.1)
+```
+
+- Was the burnin sufficient?
+ANSWER: Yes, the burnin was sufficient. The likelihood, tree length, and alpha distributions each center around a single peak. Their plots all appear to be random noise and there are no obvious patterns.
+- Does mixing look good?
+ANSWER: Yes, the mixing looks good. The plots appear to be random noise and there are no obvious patterns.
+- Did the replicates converge on similar parameter distributions?
+ANSWER: There is only one replicate, so this question does not apply.
+
+## Submit
+
+Make sure you have all files in this folder and have knit the document. Compress the folder with zip, and submit it on canvas.
+

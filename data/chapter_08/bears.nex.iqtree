@@ -1,0 +1,215 @@
+IQ-TREE 1.6.12 built Feb 23 2021
+
+Input file name: bears.nex
+Type of analysis: ModelFinder + tree reconstruction + ultrafast bootstrap (1000 replicates)
+Random seed number: 13610
+
+REFERENCES
+----------
+
+To cite ModelFinder please use: 
+
+Subha Kalyaanamoorthy, Bui Quang Minh, Thomas KF Wong, Arndt von Haeseler,
+and Lars S Jermiin (2017) ModelFinder: Fast model selection for
+accurate phylogenetic estimates. Nature Methods, 14:587–589.
+https://doi.org/10.1038/nmeth.4285
+
+To cite IQ-TREE please use:
+
+Lam-Tung Nguyen, Heiko A. Schmidt, Arndt von Haeseler, and Bui Quang Minh
+(2015) IQ-TREE: A fast and effective stochastic algorithm for estimating
+maximum likelihood phylogenies. Mol Biol Evol, 32:268-274.
+https://doi.org/10.1093/molbev/msu300
+
+Since you used ultrafast bootstrap (UFBoot) please also cite: 
+
+Diep Thi Hoang, Olga Chernomor, Arndt von Haeseler, Bui Quang Minh,
+and Le Sy Vinh (2017) UFBoot2: Improving the ultrafast bootstrap
+approximation. Mol Biol Evol, in press.
+https://doi.org/10.1093/molbev/msx281
+
+SEQUENCE ALIGNMENT
+------------------
+
+Input data: 18 sequences with 62 binary sites
+Number of constant sites: 0 (= 0% of all sites)
+Number of invariant (constant or ambiguous constant) sites: 0 (= 0% of all sites)
+Number of parsimony informative sites: 58
+Number of distinct site patterns: 56
+
+ModelFinder
+-----------
+
+Best-fit model according to BIC: JC2+FQ+ASC+G4
+
+List of models sorted by BIC scores: 
+
+Model             LogL          AIC      w-AIC      AICc     w-AICc       BIC      w-BIC
+JC2+FQ+ASC+G4     -389.6446    847.2893 + 0.3086    935.4374 + 0.8043    919.6118 + 0.6191
+JC2+FQ+ASC+R2     -388.4856    846.9712 + 0.3618    943.8943 - 0.0117    921.4209 + 0.2506
+GTR2+FO+ASC+G4    -389.6054    849.2107 + 0.1181    946.1338 - 0.0038    923.6604 + 0.0818
+GTR2+FO+ASC+R2    -388.4339    848.8678 + 0.1401    955.4278 - 0.0000    925.4447 - 0.0335
+JC2+FQ+ASC        -396.2137    858.4273 - 0.0012    938.5702 + 0.1679    928.6227 - 0.0068
+JC2+FQ+ASC+R3     -388.4776    850.9552 - 0.0494    968.1218 - 0.0000    929.6591 - 0.0041
+GTR2+FO+ASC       -395.0280    858.0560 - 0.0014    946.2042 - 0.0037    930.3786 - 0.0028
+GTR2+FO+ASC+R3    -388.4280    852.8559 - 0.0191    981.7255 - 0.0000    933.6870 - 0.0005
+JC2+FQ            -399.2298    864.4596 - 0.0001    944.6024 - 0.0082    934.6550 - 0.0003
+JC2+FQ+G4         -397.9273    863.8545 - 0.0001    952.0027 - 0.0002    936.1771 - 0.0002
+JC2+FQ+R2         -396.2728    862.5455 - 0.0002    959.4686 - 0.0000    936.9952 - 0.0001
+GTR2+FO           -398.6110    865.2219 - 0.0000    953.3701 - 0.0001    937.5445 - 0.0001
+GTR2+FO+G4        -397.6315    865.2631 - 0.0000    962.1861 - 0.0000    939.7128 - 0.0000
+GTR2+FO+R2        -396.0414    864.0828 - 0.0001    970.6428 - 0.0000    940.6596 - 0.0000
+JC2+FQ+R3         -396.2230    866.4460 - 0.0000    983.6126 - 0.0000    945.1500 - 0.0000
+GTR2+FO+R3        -396.0386    868.0771 - 0.0000    996.9467 - 0.0000    948.9082 - 0.0000
+
+AIC, w-AIC   : Akaike information criterion scores and weights.
+AICc, w-AICc : Corrected AIC scores and weights.
+BIC, w-BIC   : Bayesian information criterion scores and weights.
+
+Plus signs denote the 95% confidence sets.
+Minus signs denote significant exclusion.
+
+SUBSTITUTION PROCESS
+--------------------
+
+Model of substitution: JC2+FQ+ASC+G4
+
+Rate parameter R:
+
+  0-1: 1.0000
+
+State frequencies: (equal frequencies)
+
+Rate matrix Q:
+
+  0        -1         1
+  1         1        -1
+
+Model of rate heterogeneity: Gamma with 4 categories
+Gamma shape alpha: 0.4953
+
+ Category  Relative_rate  Proportion
+  1         0.03252        0.25
+  2         0.2488         0.25
+  3         0.8168         0.25
+  4         2.902          0.25
+Relative rates are computed as MEAN of the portion of the Gamma distribution falling in the category.
+
+MAXIMUM LIKELIHOOD TREE
+-----------------------
+
+Log-likelihood of the tree: -388.3351 (s.e. 22.7389)
+Unconstrained log-likelihood (without tree): -247.0413
+Number of free parameters (#branches + #model parameters): 34
+Akaike information criterion (AIC) score: 844.6702
+Corrected Akaike information criterion (AICc) score: 932.8183
+Bayesian information criterion (BIC) score: 916.9927
+
+Total tree length (sum of branch lengths): 2.6703
+Sum of internal branch lengths: 1.7532 (65.6568% of tree length)
+
+WARNING: 3 near-zero internal branches (<0.0161) should be treated with caution
+         Such branches are denoted by '**' in the figure below
+
+NOTE: Tree is UNROOTED although outgroup taxon 'Agriarctos_spp' is drawn at root
+Numbers in parentheses are  ultrafast bootstrap support (%)
+
++**Agriarctos_spp
+|
+|  +--Ailurarctos_lufengensis
++--| (52)
+|  |  +--Ailuropoda_melanoleuca
+|  +--| (65)
+|     |                           +**Ballusia_elmensis
+|     |                    +------| (97)
+|     |                    |      +--------------Zaragocyon_daamsi
+|     |                 +**| (42)
+|     |                 |  +**Ursavus_primaevus
+|     |           +-----| (84)
+|     |           |     +--Ursavus_brevirhinus
+|     |        +**| (59)
+|     |        |  |                                          +--Helarctos_malayanus
+|     |        |  |                                  +-------| (83)
+|     |        |  |                                  |       |     +**Ursus_americanus
+|     |        |  |                                  |       |  +--| (84)
+|     |        |  |                                  |       |  |  |  +**Ursus_arctos
+|     |        |  |                                  |       |  |  +--| (92)
+|     |        |  |                                  |       |  |     +--Ursus_maritimus
+|     |        |  |                                  |       +--| (72)
+|     |        |  |                                  |          +---Ursus_thibetanus
+|     |        |  |                          +-------| (87)
+|     |        |  |                          |       +----Melursus_ursinus
+|     |        |  +--------------------------| (97)
+|     |        |                             +**Tremarctos_ornatus
+|     |     +--| (94)
+|     |     |  +**Indarctos_vireti
+|     |  +**| (55)
+|     |  |  +**Indarctos_arctoides
+|     +--| (64)
+|        +**Indarctos_punjabiensis
+|
++--Kretzoiarctos_beatrix
+
+Tree in newick format:
+
+(Agriarctos_spp:0.0000020006,(Ailurarctos_lufengensis:0.0224044310,(Ailuropoda_melanoleuca:0.0487891377,(((((((Ballusia_elmensis:0.0000028248,Zaragocyon_daamsi:0.3956831186)97:0.1818773127,Ursavus_primaevus:0.0000020006)42:0.0000028884,Ursavus_brevirhinus:0.0181354776)84:0.1546330681,(((Helarctos_malayanus:0.0520739110,((Ursus_americanus:0.0000022337,(Ursus_arctos:0.0140757569,Ursus_maritimus:0.0835392064)92:0.0561064022)84:0.0629171542,Ursus_thibetanus:0.1013065846)72:0.0373741816)83:0.2178935973,Melursus_ursinus:0.1489288297)87:0.2197089346,Tremarctos_ornatus:0.0000022074)97:0.6978277927)59:0.0053157266,Indarctos_vireti:0.0000020795)94:0.0357217036,Indarctos_arctoides:0.0110414381)55:0.0098673600,Indarctos_punjabiensis:0.0000020006)64:0.0330841833)65:0.0164380479)52:0.0244506002,Kretzoiarctos_beatrix:0.0210639049);
+
+CONSENSUS TREE
+--------------
+
+Consensus tree is constructed from 1000bootstrap trees
+Log-likelihood of consensus tree: -388.335719
+Robinson-Foulds distance between ML tree and consensus tree: 0
+
+Branches with support >0.000000% are kept (extended consensus)
+Branch lengths are optimized by maximum likelihood on original alignment
+Numbers in parentheses are bootstrap supports (%)
+
++--Agriarctos_spp
+|
+|  +--Ailurarctos_lufengensis
++--| (52)
+|  |  +--Ailuropoda_melanoleuca
+|  +--| (65)
+|     |                          +--Ballusia_elmensis
+|     |                   +------| (97)
+|     |                   |      +--------------Zaragocyon_daamsi
+|     |                +--| (42)
+|     |                |  +--Ursavus_primaevus
+|     |           +----| (84)
+|     |           |    +--Ursavus_brevirhinus
+|     |        +--| (59)
+|     |        |  |                                          +--Helarctos_malayanus
+|     |        |  |                                  +-------| (83)
+|     |        |  |                                  |       |     +--Ursus_americanus
+|     |        |  |                                  |       |  +--| (84)
+|     |        |  |                                  |       |  |  |  +--Ursus_arctos
+|     |        |  |                                  |       |  |  +--| (92)
+|     |        |  |                                  |       |  |     +--Ursus_maritimus
+|     |        |  |                                  |       +--| (72)
+|     |        |  |                                  |          +---Ursus_thibetanus
+|     |        |  |                          +-------| (87)
+|     |        |  |                          |       +----Melursus_ursinus
+|     |        |  +--------------------------| (97)
+|     |        |                             +--Tremarctos_ornatus
+|     |     +--| (94)
+|     |     |  +--Indarctos_vireti
+|     |  +--| (55)
+|     |  |  +--Indarctos_arctoides
+|     +--| (64)
+|        +--Indarctos_punjabiensis
+|
++--Kretzoiarctos_beatrix
+
+
+Consensus tree in newick format: 
+
+(Agriarctos_spp:0.0000020006,(Ailurarctos_lufengensis:0.0222449404,(Ailuropoda_melanoleuca:0.0484590890,(((((((Ballusia_elmensis:0.0000020540,Zaragocyon_daamsi:0.3910407076)97:0.1789319023,Ursavus_primaevus:0.0000020006)42:0.0000028797,Ursavus_brevirhinus:0.0179865068)84:0.1477635536,(((Helarctos_malayanus:0.0519044661,((Ursus_americanus:0.0000025531,(Ursus_arctos:0.0141287991,Ursus_maritimus:0.0825746824)92:0.0554568390)84:0.0625158117,Ursus_thibetanus:0.1002782216)72:0.0366467973)83:0.2148778308,Melursus_ursinus:0.1474453134)87:0.2167661940,Tremarctos_ornatus:0.0000022463)97:0.6798144298)59:0.0107385250,Indarctos_vireti:0.0000020176)94:0.0354700778,Indarctos_arctoides:0.0109754825)55:0.0098092396,Indarctos_punjabiensis:0.0000020006)64:0.0329454065)65:0.0162893820)52:0.0243254779,Kretzoiarctos_beatrix:0.0209220568);
+
+TIME STAMP
+----------
+
+Date and time: Thu Oct 27 12:18:48 2022
+Total CPU time used: 81.377849 seconds (0h:1m:21s)
+Total wall-clock time used: 87.8685706 seconds (0h:1m:27s)
+

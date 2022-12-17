@@ -1,0 +1,89 @@
+---
+title: "Exercise 08"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, echo = FALSE, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+library(ape)
+
+# Load data import, wrangling, and plotting tools from the Tidyverse. 
+# See https://r4ds.had.co.nz/ for more
+library(tidyverse)
+
+library(magrittr)
+
+```
+
+
+## Introduction
+
+The goals of this exercise are to perform a basic morphological analyses.
+
+You will use a dataset on fossil bears, featured in [this other tutorial](https://revbayes.github.io/tutorials/morph_tree/) and derived from a [previous study](https://doi.org/10.3989/egeol.40714.182).
+
+
+
+
+## Problems and tasks
+
+
+
+
+> **_Problem 1:_** (1 point) 
+
+1. Examine the data matrix bears.nex, which is in nexus format. Answer the following questions:
+
+- How many species and characters are there?
+
+There are 18 species and 62 characters.
+
+- Describe the structure of the data (continuous, discrete, number of states, etc...) 
+
+The data matrix is discrete with 2 states, 1 and 0, indicating presence or absence of a character. The characters are morphological traits.
+
+
+Next, run a phylogenetic analysis with iqtree:
+
+   iqtree -s bears.nex -bb 1000 -nt AUTO 
+
+
+
+
+> **_Problem 2:_** (2 points) Examine the `bears.nex.iqtree` log file. Indicate which which model and parameters were selected. Describe this model here.
+
+ModelFinder selected the JC2+FQ+ASC+G4 model with the following parameters:
+```
+- Rate parameter R: 1.0000
+- State frequencies: equal frequencies
+- Rate matrix Q:
+  0        -1         1
+  1         1        -1
+- Model of rate heterogeneity: Gamma with 4 categories
+- Gamma shape alpha: 0.4953
+
+ Category  Relative_rate  Proportion
+  1         0.03252        0.25
+  2         0.2488         0.25
+  3         0.8168         0.25
+  4         2.902          0.25
+Relative rates are computed as MEAN of the portion of the Gamma distribution falling in the category.
+```
+The JC2 model is a two-state model (Jukes-Cantor for binary data) with equal substitution rates and state frequencies. The FQ model is a frequency model with equal base frequencies. The ASC model is an ascertainment bias correction model that should be applied if the alignment does not contain constant sites, which makes sense for morphological data. The G4 model is a gamma distribution with 4 categories. The overall model is a combination of these models.
+
+
+> **_Problem 3:_** (1 point) Insert a code block below to plot the tree with bootstrap support. Then summarize the result (for example, how well supported is the tree?)
+
+```{r fig.width=18, fig.height=30}
+
+phy <- read.tree("bears.nex.contree")
+plot(phy)
+nodelabels(phy$node.label)
+
+```
+
+The tree is not well supported. The bootstrap values are low and the tree is not monophyletic.
+

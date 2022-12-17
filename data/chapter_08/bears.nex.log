@@ -1,0 +1,166 @@
+IQ-TREE multicore version 1.6.12 for Linux 64-bit built Feb 23 2021
+Developed by Bui Quang Minh, Nguyen Lam Tung, Olga Chernomor,
+Heiko Schmidt, Dominik Schrempf, Michael Woodhams.
+
+Host:    farnam2.farnam.hpc.yale.internal (AVX2, FMA3, 125 GB RAM)
+Command: iqtree -s bears.nex -bb 1000 -nt AUTO
+Seed:    13610 (Using SPRNG - Scalable Parallel Random Number Generator)
+Time:    Thu Oct 27 12:15:46 2022
+Kernel:  AVX+FMA - auto-detect threads (24 CPU cores detected)
+
+Reading alignment file bears.nex ... Nexus format detected
+Alignment has 18 sequences with 62 columns, 56 distinct patterns
+58 parsimony-informative, 4 singleton sites, 0 constant sites
+                         Gap/Ambiguity  Composition  p-value
+   1  Agriarctos_spp            56.45%    passed     35.60%
+   2  Ailurarctos_lufengensis   51.61%    passed     15.58%
+   3  Ailuropoda_melanoleuca     0.00%    passed     75.38%
+   4  Ballusia_elmensis         35.48%    failed      0.04%
+   5  Helarctos_malayanus        0.00%    passed     28.21%
+   6  Indarctos_arctoides        0.00%    failed      4.86%
+   7  Indarctos_punjabiensis     1.61%    passed     17.72%
+   8  Indarctos_vireti           4.84%    passed     39.35%
+   9  Kretzoiarctos_beatrix     29.03%    passed     39.29%
+  10  Melursus_ursinus           0.00%    passed     65.38%
+  11  Tremarctos_ornatus         0.00%    passed     14.31%
+  12  Ursavus_brevirhinus       40.32%    passed     83.33%
+  13  Ursavus_primaevus         53.23%    passed     82.08%
+  14  Ursus_americanus           0.00%    passed     18.36%
+  15  Ursus_arctos               0.00%    passed     84.58%
+  16  Ursus_maritimus            0.00%    passed     75.38%
+  17  Ursus_thibetanus           0.00%    passed     84.58%
+  18  Zaragocyon_daamsi         35.48%    failed      0.13%
+WARNING: 3 sequences contain more than 50% gaps/ambiguity
+****  TOTAL                     17.11%  3 sequences failed composition chi2 test (p-value<5%; df=1)
+
+Creating fast initial parsimony tree by random order stepwise addition...
+1.377 seconds, parsimony score: 124 (based on 62 sites)
+NOTE: ModelFinder requires 0 MB RAM!
+ModelFinder will test 44 binary models (sample size: 62) ...
+ No. Model         -LnL         df  AIC          AICc         BIC
+Measuring multi-threading efficiency up to 24 CPU cores
+Increase to 10 rounds for branch lengths
+11099 trees examined
+Threads: 1 / Time: 24.001 sec / Speedup: 1.000 / Efficiency: 100% / LogL: -499
+Threads: 2 / Time: 69.504 sec / Speedup: 0.345 / Efficiency: 17% / LogL: -499
+BEST NUMBER OF THREADS: 1
+
+  1  JC2+FQ        399.230      33  864.460      944.602      934.655
+  2  JC2+FQ+ASC    396.214      33  858.427      938.570      928.623
+  3  JC2+FQ+G4     397.927      34  863.855      952.003      936.177
+  4  JC2+FQ+ASC+G4 389.645      34  847.289      935.437      919.612
+  5  JC2+FQ+R2     396.273      35  862.546      959.469      936.995
+  6  JC2+FQ+R3     396.223      37  866.446      983.613      945.150
+ 14  JC2+FQ+ASC+R2 388.486      35  846.971      943.894      921.421
+ 15  JC2+FQ+ASC+R3 388.478      37  850.955      968.122      929.659
+ 23  GTR2+FO       398.611      34  865.222      953.370      937.545
+ 24  GTR2+FO+ASC   395.028      34  858.056      946.204      930.379
+ 25  GTR2+FO+G4    397.632      35  865.263      962.186      939.713
+ 26  GTR2+FO+ASC+G4 389.605      35  849.211      946.134      923.660
+ 27  GTR2+FO+R2    396.041      36  864.083      970.643      940.660
+ 28  GTR2+FO+R3    396.039      38  868.077      996.947      948.908
+ 36  GTR2+FO+ASC+R2 388.434      36  848.868      955.428      925.445
+ 37  GTR2+FO+ASC+R3 388.428      38  852.856      981.726      933.687
+Akaike Information Criterion:           JC2+FQ+ASC+R2
+Corrected Akaike Information Criterion: JC2+FQ+ASC+G4
+Bayesian Information Criterion:         JC2+FQ+ASC+G4
+Best-fit model: JC2+FQ+ASC+G4 chosen according to BIC
+
+All model information printed to bears.nex.model.gz
+CPU time for ModelFinder: 86.494 seconds (0h:1m:26s)
+Wall-clock time for ModelFinder: 94.995 seconds (0h:1m:34s)
+Generating 1000 samples for ultrafast bootstrap (seed: 13610)...
+
+NOTE: 0 MB RAM (0 GB) is required!
+Measuring multi-threading efficiency up to 24 CPU cores
+Increase to 10 rounds for branch lengths
+6026 trees examined
+Threads: 1 / Time: 24.001 sec / Speedup: 1.000 / Efficiency: 100% / LogL: -484
+Threads: 2 / Time: 61.572 sec / Speedup: 0.390 / Efficiency: 19% / LogL: -484
+BEST NUMBER OF THREADS: 1
+
+Estimate model parameters (epsilon = 0.100)
+1. Initial log-likelihood: -390.174
+2. Current log-likelihood: -389.789
+3. Current log-likelihood: -389.678
+Optimal log-likelihood: -389.606
+Gamma shape alpha: 0.547
+Parameters optimization took 3 rounds (0.004 sec)
+Computing ML distances based on estimated model parameters... 0.000 sec
+WARNING: Some pairwise ML distances are too long (saturated)
+Computing BIONJ tree...
+0.002 seconds
+Log-likelihood of BIONJ tree: -390.062
+--------------------------------------------------------------------
+|             INITIALIZING CANDIDATE TREE SET                      |
+--------------------------------------------------------------------
+Generating 98 parsimony trees... 0.080 second
+Computing log-likelihood of 98 initial trees ... 0.106 seconds
+Current best score: -388.950
+
+Do NNI search on 20 best initial trees
+Estimate model parameters (epsilon = 0.100)
+BETTER TREE FOUND at iteration 1: -388.340
+BETTER TREE FOUND at iteration 2: -388.340
+UPDATE BEST LOG-LIKELIHOOD: -388.339
+Iteration 10 / LogL: -388.340 / Time: 0h:1m:25s
+UPDATE BEST LOG-LIKELIHOOD: -388.339
+Iteration 20 / LogL: -388.340 / Time: 0h:1m:26s
+Finish initializing candidate tree set (4)
+Current best tree score: -388.339 / CPU time: 0.463
+Number of iterations: 20
+--------------------------------------------------------------------
+|               OPTIMIZING CANDIDATE TREE SET                      |
+--------------------------------------------------------------------
+Iteration 30 / LogL: -389.570 / Time: 0h:1m:26s (0h:3m:34s left)
+Iteration 40 / LogL: -389.570 / Time: 0h:1m:26s (0h:2m:17s left)
+Iteration 50 / LogL: -389.629 / Time: 0h:1m:26s (0h:1m:31s left)
+Log-likelihood cutoff on original alignment: -402.874
+Iteration 60 / LogL: -389.571 / Time: 0h:1m:26s (0h:1m:1s left)
+Iteration 70 / LogL: -388.340 / Time: 0h:1m:27s (0h:0m:40s left)
+Iteration 80 / LogL: -388.340 / Time: 0h:1m:27s (0h:0m:24s left)
+Iteration 90 / LogL: -388.340 / Time: 0h:1m:27s (0h:0m:11s left)
+UPDATE BEST LOG-LIKELIHOOD: -388.339
+Iteration 100 / LogL: -389.629 / Time: 0h:1m:27s (0h:0m:1s left)
+Log-likelihood cutoff on original alignment: -404.934
+NOTE: Bootstrap correlation coefficient of split occurrence frequencies: 0.998
+TREE SEARCH COMPLETED AFTER 103 ITERATIONS / Time: 0h:1m:27s
+
+--------------------------------------------------------------------
+|                    FINALIZING TREE SEARCH                        |
+--------------------------------------------------------------------
+Performs final model parameters optimization
+Estimate model parameters (epsilon = 0.010)
+1. Initial log-likelihood: -388.339
+Optimal log-likelihood: -388.335
+Gamma shape alpha: 0.495
+Parameters optimization took 1 rounds (0.002 sec)
+BEST SCORE FOUND : -388.335
+Creating bootstrap support values...
+Split supports printed to NEXUS file bears.nex.splits.nex
+Total tree length: 2.670
+
+Total number of iterations: 103
+CPU time used for tree search: 2.061 sec (0h:0m:2s)
+Wall-clock time used for tree search: 2.221 sec (0h:0m:2s)
+Total CPU time used: 81.378 sec (0h:1m:21s)
+Total wall-clock time used: 87.854 sec (0h:1m:27s)
+
+Computing bootstrap consensus tree...
+Reading input file bears.nex.splits.nex...
+18 taxa and 146 splits.
+Consensus tree written to bears.nex.contree
+Reading input trees file bears.nex.contree
+Log-likelihood of consensus tree: -388.336
+
+Analysis results written to: 
+  IQ-TREE report:                bears.nex.iqtree
+  Maximum-likelihood tree:       bears.nex.treefile
+  Likelihood distances:          bears.nex.mldist
+
+Ultrafast bootstrap approximation results written to:
+  Split support values:          bears.nex.splits.nex
+  Consensus tree:                bears.nex.contree
+  Screen log file:               bears.nex.log
+
+Date and Time: Thu Oct 27 12:18:48 2022
