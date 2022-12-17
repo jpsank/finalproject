@@ -23,6 +23,11 @@ Data will consist of aligned sequences; the Harnessing Machine Learning paper in
 Take `bears_cytb.nex` and `bears_morphology.nex` from Exercise 9.
 Take Cytochrome B sequence from Ailuropoda melanoleuca in `bears_cytb.nex`, search BLAST for matching nucleotide sequences
 
+Clone GATC repository, follow installation instructions. Despite attempting to build C extension with Python versions 3.7, 3.9, and Anaconda on both MacOS and Farnam Cluster, ran into tenacious errors with deprecated CPython bindings. Extrapolated from required Python package versions (matplotlib==1.5.1) that GATC was designed using Python version 3.4, which has reached end-of-life; thus, software is unusable.
+- Make issue on repo
+
+Clone garli repository, follow installation instructions. Install beagle-lib and Nexus Class Library (NCL) dependencies, 
+
 The tools I used were... See analysis files at (links to analysis files).
 
 ## Results
